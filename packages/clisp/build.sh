@@ -103,8 +103,10 @@ termux_step_configure_autotools () {
 termux_step_make() {
 	if ls ./*akefile &> /dev/null; then
 		if [ -z "$TERMUX_PKG_EXTRA_MAKE_ARGS" ]; then
+			ulimit -s 16384
 			make -j $TERMUX_MAKE_PROCESSES
 		else
+			ulimit -s 16384			
 			make -j $TERMUX_MAKE_PROCESSES ${TERMUX_PKG_EXTRA_MAKE_ARGS}
 		fi
 	fi
