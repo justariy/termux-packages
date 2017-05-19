@@ -6,9 +6,10 @@ TERMUX_PKG_DEPENDS="libsigsegv"
 TERMUX_PKG_SRCURL=https://ftp.gnu.org/pub/gnu/clisp/release/${TERMUX_PKG_VERSION}/clisp-${TERMUX_PKG_VERSION}.tar.gz
 TERMUX_PKG_SHA256=bd2f6252c681337c0b6aa949fae3f92d3202dee3998c98a88ec28c72b115e866
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="--srcdir=$TERMUX_PKG_SRCDIR"
+TERMUX_PKG_CLANG=no
 
 termux_step_pre_configure() {
-	CFLAGS=" -DNO_GENERATIONAL_GC -mcpu=arm1136j-s -no-integrated-as"
+	CFLAGS=" -DNO_GENERATIONAL_GC -mcpu=arm1136j-s"
 }
 
 termux_step_configure_autotools () {
