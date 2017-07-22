@@ -13,15 +13,15 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --enable-x509-alt-username
 ac_cv_func_getpwnam=yes
 ac_cv_func_getpass=yes
-IFCONFIG=$TERMUX_PREFIX/bin/ifconfig
-ROUTE=$TERMUX_PREFIX/bin/route
-IPROUTE=$TERMUX_PREFIX/bin/ip
-NETSTAT=$TERMUX_PREFIX/bin/netstat"
+IFCONFIG=/system/bin/ifconfig
+ROUTE=/system/bin/route
+IPROUTE=/system/bin/ip
+NETSTAT=/system/bin/netstat"
 TERMUX_PKG_MAINTAINER="Vishal Biswas @vishalbiswas"
 
 termux_step_pre_configure () {
     # need to provide getpass, else you "can't get console input"
-    cp "$TERMUX_PKG_BUILDER_DIR/netbsd_getpass.c" "$TERMUX_PKG_SRCDIR/src/openvpn/"
+    cp $TERMUX_PKG_BUILDER_DIR/getpass.{c,h} "$TERMUX_PKG_SRCDIR/src/openvpn/"
 
 #    CFLAGS="$CFLAGS -DTARGET_ANDROID"
     LDFLAGS="$LDFLAGS -llog "

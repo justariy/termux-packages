@@ -4,7 +4,7 @@
  
  
  #ifdef HAVE_GETPASS
-+#include "netbsd_getpass.c"
++#include "getpass.c"
  
  /**
   * Open the current console TTY for read/write operations
