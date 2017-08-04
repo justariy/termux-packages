@@ -9,7 +9,6 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --disable-systemd
 --disable-debug
 --enable-iproute2
---enable-small
 --enable-x509-alt-username
 ac_cv_func_getpwnam=yes
 ac_cv_func_getpass=yes
