@@ -1,14 +1,14 @@
 --- ./src/makemake.in	2017-08-06 00:03:08.176357582 +0000
 +++ ./makemake.in	2017-08-06 00:16:08.100993998 +0000
-@@ -1591,7 +1591,7 @@
- test "${with_dynamic_modules}" != no && XCFLAGS="$XCFLAGS -DDYNAMIC_MODULES"
+@@ -2291,7 +2291,7 @@
+ echotab 'test -f $@/Makefile || sh config.status $@/Makefile depfiles'
+ echotab 'cd $@ && $(MAKE) CFLAGS="$(SUBDIR_CFLAGS)" CLISP_LIBDIR='${CLISP_LIBDIR}
+ echol
+-echol "${GLLIB_A}: gllib"
++echol "${GLLIB_A}: gllib/libgnu.a"
+ echotab 'test -r $@ || $(LN_S) gllib/libgnu.a $@'
+ echol
  
- GLLIB_A=libgnu_cl.a
--LIBS="${LIBS} ${GLLIB_A}"
-+LIBS="${LIBS} ${GLLIB_A}" -landroid-support
- FILES="${GLLIB_A} "${FILES}
- 
- if [ "${with_readline}" = no ]; then
 @@ -2414,7 +2414,7 @@
    echol "UTILCC=gcc"
  elif [ $CROSS = true ]; then

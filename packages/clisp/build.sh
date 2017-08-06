@@ -24,26 +24,37 @@ termux_step_configure () {
 	export XCFLAGS="$CFLAGS -liconv -lunistring"
 	export XLDFLAGS="$LDFLAGS"
 
-	unset CC
-	unset CPPFLAGS
-	unset CFLAGS
-	unset LDFLAGS
-
-	#export CC=gcc
-
-	env $AVOID_GNULIB HOS=unix $TERMUX_PKG_SRCDIR/configure \
+	env $AVOID_GNULIB $TERMUX_PKG_SRCDIR/configure \
 		--host=$TERMUX_HOST_PLATFORM \
+		--build=arm-unknown-linux-androideabi \
 		--prefix=$TERMUX_PREFIX \
 		--enable-shared \
 		--disable-static \
 		--srcdir=$TERMUX_PKG_SRCDIR \
 		--with-libreadline-prefix=$TERMUX_PREFIX \
 		--with-libiconv-prefix=$TERMUX_PREFIX \
+		--ignore-absence-of-libsigsegv \
 		ac_cv_func_select=yes
 }
 
 termux_step_post_configure () {
-	ln -s ~/termux-packages/clisp/interpreted.mem $TERMUX_PKG_BUILDDIR/
-	ln -s ~/termux-packages/clisp/halfcompiled.mem $TERMUX_PKG_BUILDDIR/
-	ln -s ~/termux-packages/clisp/lispinit.mem $TERMUX_PKG_BUILDDIR/
+	ln -s ~/termux-packages/clisp/clisp.h $TERMUX_PKG_BUILDDIR/
+}
+
+termux_step_make() {
+	# Sort of following steps described in this article:
+	# http://dancorkill.com/pubs/CNAS-ATSN08.pdf
+	make -j $TERMUX_MAKE_PROCESSES init
+	cd gllib
+	make -j $TERMUX_MAKE_PROCESSES stdint.h
+	make -j $TERMUX_MAKE_PROCESSES configmake.h
+	make -j $TERMUX_MAKE_PROCESSES libgnu.a
+	cd ..
+	make -j $TERMUX_MAKE_PROCESSES allc
+	make -j $TERMUX_MAKE_PROCESSES lisp.run
+}
+
+termux_step_make_install() {
+	cp $TERMUX_PKG_BUILDDIR/lisp.run $TERMUX_PREFIX/bin/
+	return
 }
