@@ -1,0 +1,56 @@
+--- ./src/makemake.in	2017-08-06 00:03:08.176357582 +0000
++++ ./makemake.in	2017-08-06 00:16:08.100993998 +0000
+@@ -1591,7 +1591,7 @@
+ test "${with_dynamic_modules}" != no && XCFLAGS="$XCFLAGS -DDYNAMIC_MODULES"
+ 
+ GLLIB_A=libgnu_cl.a
+-LIBS="${LIBS} ${GLLIB_A}"
++LIBS="${LIBS} ${GLLIB_A}" -landroid-support
+ FILES="${GLLIB_A} "${FILES}
+ 
+ if [ "${with_readline}" = no ]; then
+@@ -2414,7 +2414,7 @@
+   echol "UTILCC=gcc"
+ elif [ $CROSS = true ]; then
+   echol "# **HACK**: utilities must run locally"
+-  echol "UTILCC=cc"
++  echol "UTILCC=gcc"
+ else
+   echol "UTILCC=\$(CC)"
+ fi
+@@ -2683,7 +2683,7 @@
+   test $HSYSOS = win32gcc -o $HSYSOS = cygwin; no_lisp_o=$?
+   echol "lisp.a : \$(OBJECTS)"
+   if [ $no_lisp_o = 1 ]; then
+-    echotab "ld -r -o lisp.o \$(OBJECTS)"
++    echotab "\$(LD) -r -o lisp.o \$(OBJECTS)"
+     echotab "chmod a-x lisp.o"
+   fi
+   if test -z "$LIBGCC"; then
+@@ -3456,7 +3456,7 @@
+   esac
+   echol "${f} : ${sourcedir}_${f}${TXT_INCLUDES}${depends} txt2c${HEXE}"
+   echotab "\$(TXT2C) < ${sourcedir}_${f} > txt.c"
+-  echotab_to_HEXE "\$(CC) \$(CPPFLAGS) \$(CFLAGS)${flags} \$(CLFLAGS)${XCC_NOOPTFLAGS}" "txt.c" "txt"
++  echotab_to_HEXE "\$(UTILCC) \$(CPPFLAGS) \$(CFLAGS)${flags} \$(CLFLAGS)${XCC_NOOPTFLAGS}" "txt.c" "txt"
+   line="${HERE}txt"
+   test $f = clisp.1 -o $f = clisp-link.1 && \
+     line=$line" | \$(GREP) -v ${ARGQ1}^ *\$\$${ARGQ1}"
+@@ -3497,7 +3497,7 @@
+ 
+ echol
+ 
+-if [ $CROSS = false ] ; then
++# if [ $CROSS = false ] ; then
+   DRIVER_DEP=''; DRIVER_RES=''
+   if [ $HOS = win32 ]; then
+     DRIVER_RES=" clispres${TOBJ}"
+@@ -3716,7 +3716,7 @@
+     echol
+     echol
+   fi
+-fi
++# fi
+ 
+ echo_dist_modules () {
+   echotab "for module in '' \$(BASE_MODULES) \$(MODULES); do if test -n \"\$\$module\"; then \\"

@@ -36,6 +36,8 @@ PACKAGES+=" xmlto"
 PACKAGES+=" xutils-dev" # Provides 'makedepend' which the openssl build uses.
 PACKAGES+=" libexpat1-dev" # Needed by ghostscript
 PACKAGES+=" libjpeg-dev" # Needed by ghostscript
+PACKAGES+=" clisp" # Needed for cross-compiling clisp
+PACKAGES+=" libunistring-dev" # Needed for clisp
 
 DEBIAN_FRONTEND=noninteractive sudo apt-get install -yq $PACKAGES
 
