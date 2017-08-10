@@ -12,10 +12,10 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --enable-x509-alt-username
 ac_cv_func_getpwnam=yes
 ac_cv_func_getpass=yes
-IFCONFIG=/system/bin/ifconfig
-ROUTE=/system/bin/route
-IPROUTE=/system/bin/ip
-NETSTAT=/system/bin/netstat"
+IFCONFIG=$PREFIX/bin/ifconfig
+ROUTE=$PREFIX/bin/route
+IPROUTE=$PREFIX/bin/ip
+NETSTAT=$PREFIX/bin/netstat"
 TERMUX_PKG_MAINTAINER="Vishal Biswas @vishalbiswas"
 
 termux_step_pre_configure () {
