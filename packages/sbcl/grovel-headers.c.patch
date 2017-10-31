@@ -1,0 +1,27 @@
+--- ./tools-for-build/grovel-headers.c	2017-10-30 17:21:52.000000000 +0000
++++ ../grovel-headers.c	2017-10-31 13:53:33.303714164 +0000
+@@ -39,12 +39,7 @@
+   #include <sys/times.h>
+   #include <sys/wait.h>
+   #include <sys/ioctl.h>
+-#ifdef LISP_FEATURE_ANDROID
+   #include <termios.h>
+-#else
+-  #include <sys/termios.h>
+-  #include <langinfo.h>
+-#endif
+   #include <sys/time.h>
+   #include <dlfcn.h>
+ #endif
+@@ -141,10 +136,8 @@
+     defconstant("pollnval", POLLNVAL);
+     defconstant("pollerr", POLLERR);
+     DEFTYPE("nfds-t", nfds_t);
+-#ifndef LISP_FEATURE_ANDROID
+     printf(";;; langinfo\n");
+-    defconstant("codeset", CODESET);
+-#endif
++    defconstant("codeset", "UTF-8");
+     printf(";;; types, types, types\n");
+     DEFTYPE("clock-t", clock_t);
+     DEFTYPE("dev-t",   dev_t);

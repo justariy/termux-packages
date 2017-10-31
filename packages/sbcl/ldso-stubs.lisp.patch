@@ -1,0 +1,28 @@
+--- ./tools-for-build/ldso-stubs.lisp	2017-10-30 17:21:52.000000000 +0000
++++ ../ldso-stubs.lisp	2017-10-31 13:44:11.503960719 +0000
+@@ -240,7 +240,6 @@
+                    "fsync"
+                    "ftruncate"
+                    "getcwd"
+-                   "getdtablesize"
+                    "getegid"
+                    "getenv"
+                    "getgid"
+@@ -303,7 +302,6 @@
+                    #!-hpux "tzname"
+                    "unlink"
+                    "utimes"
+-                   "wait3"
+                    "waitpid"
+                    "write")
+                  ;; These aren't needed on the X86 because they're microcoded into the
+@@ -346,8 +344,7 @@
+                  #!+os-provides-dladdr
+                  '("dladdr")
+                  #!-android
+-                   '("nl_langinfo"
+-                     "getpagesize"
++                   '("getpagesize"
+                      "cfgetispeed"
+                      "cfgetospeed"
+                      "cfsetispeed"

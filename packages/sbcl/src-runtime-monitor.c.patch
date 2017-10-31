@@ -1,0 +1,21 @@
+replace bcopy with memmove as done in screen: https://github.com/termux/termux-packages/tree/master/packages/screen
+--- ./src/runtime/monitor.c	2017-10-30 17:21:52.000000000 +0000
++++ ../monitor.c	2017-10-31 13:25:00.793182449 +0000
+@@ -509,7 +509,7 @@
+ {
+     jmp_buf oldbuf;
+ 
+-    bcopy(curbuf, oldbuf, sizeof(oldbuf));
++    memmove(oldbuf, curbuf, sizeof(oldbuf));
+ 
+     printf("Welcome to LDB, a low-level debugger for the Lisp runtime environment.\n");
+ 
+@@ -519,7 +519,7 @@
+ 
+     done = 0;
+ 
+-    bcopy(oldbuf, curbuf, sizeof(curbuf));
++    memmove(curbuf, oldbuf, sizeof(curbuf));
+ }
+ 
+ void

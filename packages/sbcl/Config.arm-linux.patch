@@ -1,0 +1,11 @@
+--- ./src/runtime/Config.arm-linux	2017-10-30 17:21:52.000000000 +0000
++++ ../Config.arm-linux	2017-10-31 13:37:44.096258081 +0000
+@@ -34,6 +34,8 @@
+   CFLAGS += -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
+ endif
+ 
++CFLAGS += -DSVR4
++
+ # Nothing to do for after-grovel-headers.
+ .PHONY: after-grovel-headers
+ after-grovel-headers:

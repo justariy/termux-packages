@@ -1,0 +1,57 @@
+replace bcopy with memmove as done in screen: https://github.com/termux/termux-packages/tree/master/packages/screen
+--- ./src/runtime/purify.c	2017-10-30 17:21:52.000000000 +0000
++++ ../purify.c	2017-10-31 13:24:34.717196805 +0000
+@@ -153,7 +153,7 @@
+     lispobj *new = newspace_alloc(nwords,constant);
+ 
+     /* Copy it. */
+-    bcopy(old, new, nwords * sizeof(lispobj));
++    memmove(new, old, nwords * sizeof(lispobj));
+ 
+     /* Deposit forwarding pointer. */
+     lispobj result = make_lispobj(new, lowtag_of(thing));
+@@ -193,7 +193,7 @@
+     lispobj *new = newspace_alloc(nwords, 0);    /* inconstant */
+ 
+     /* Copy it. */
+-    bcopy(old, new, nwords * sizeof(lispobj));
++    memmove(new, old, nwords * sizeof(lispobj));
+ 
+     /* Deposit forwarding pointer. */
+     lispobj result = make_lispobj(new, lowtag_of(thing));
+@@ -218,7 +218,7 @@
+     lispobj *new = newspace_alloc(nwords, 1);     /* always constant */
+ 
+     /* copy it. */
+-    bcopy(old, new, nwords * sizeof(lispobj));
++    memmove(new, old, nwords * sizeof(lispobj));
+ 
+     /* Deposit forwarding pointer. */
+     lispobj result = make_lispobj(new, lowtag_of(thing));
+@@ -234,7 +234,7 @@
+     long nwords = sizetab[widetag_of(vector->header)]((lispobj*)vector);
+ 
+     lispobj *new = newspace_alloc(nwords, (constant || !boxed));
+-    bcopy(vector, new, nwords * sizeof(lispobj));
++    memmove(new, vector, nwords * sizeof(lispobj));
+ 
+     lispobj result = make_lispobj(new, lowtag_of(thing));
+     vector->header = result;
+@@ -254,7 +254,7 @@
+ 
+     struct code *new = (struct code *)newspace_alloc(nwords,1); /* constant */
+ 
+-    bcopy(code, new, nwords * sizeof(lispobj));
++    memmove(new, code, nwords * sizeof(lispobj));
+ 
+     lispobj result = make_lispobj(new, OTHER_POINTER_LOWTAG);
+ 
+@@ -325,7 +325,7 @@
+             (nwords,(widetag_of(header)!=FUNCALLABLE_INSTANCE_WIDETAG));
+ 
+         /* Copy it. */
+-        bcopy(old, new, nwords * sizeof(lispobj));
++        memmove(new, old, nwords * sizeof(lispobj));
+ 
+         /* Deposit forwarding pointer. */
+         lispobj result = make_lispobj(new, lowtag_of(thing));
