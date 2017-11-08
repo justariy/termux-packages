@@ -2,9 +2,8 @@ TERMUX_PKG_HOMEPAGE=https://www.tug.org/texlive/
 TERMUX_PKG_DESCRIPTION="TeX Live is a distribution of the TeX typesetting system."
 TERMUX_PKG_MAINTAINER="Henrik Grimler @Grimler91"
 _MAJOR_VERSION=20170524
-_MINOR_VERSION=
-TERMUX_PKG_VERSION=${_MAJOR_VERSION}${_MINOR_VERSION}
-TERMUX_PKG_REVISION=4
+TERMUX_PKG_VERSION=${_MAJOR_VERSION}
+TERMUX_PKG_REVISION=5
 TERMUX_PKG_SRCURL=("ftp://ftp.tug.org/texlive/historic/${TERMUX_PKG_VERSION:0:4}/"\
 {"texlive-$_MAJOR_VERSION-texmf.tar.xz",\
 "texlive-$_MAJOR_VERSION-extra.tar.xz",\
@@ -21,7 +20,7 @@ TL_FILE_LISTS=("texlive-texmf.list"
 "install-tl.list")
 TERMUX_PKG_PLATFORM_INDEPENDENT=yes
 
-TL_ROOT=$TERMUX_PREFIX/share
+TL_ROOT=$TERMUX_PREFIX/share/texlive
 TL_BINDIR=$TERMUX_PREFIX/bin
 
 termux_step_extract_package() {
@@ -97,3 +96,50 @@ termux_step_create_debscripts () {
 	echo "exit 0" >> prerm
 	chmod 0755 prerm
 }
+
+# Files to rm, first from texlive-$_MAJOR_VERSION-extra and then from install-tl-unx
+TERMUX_PKG_RM_AFTER_INSTALL="
+share/texlive/README
+share/texlive/README.usergroups
+share/texlive/autorun.inf
+share/texlive/doc.html
+share/texlive/index.html
+share/texlive/install-tl
+share/texlive/install-tl-advanced.bat
+share/texlive/install-tl-windows.bat
+share/texlive/readme-html.dir/readme.ja.html
+share/texlive/readme-html.dir/readme.ru.html
+share/texlive/readme-html.dir/readme.zh-cn.html
+share/texlive/readme-html.dir/readme.it.html
+share/texlive/readme-html.dir/readme.es.html
+share/texlive/readme-html.dir/readme.pl.html
+share/texlive/readme-html.dir/readme.de.html
+share/texlive/readme-html.dir/readme.fr.html
+share/texlive/readme-html.dir/readme.sr.html
+share/texlive/readme-html.dir/readme.pt-br.html
+share/texlive/readme-html.dir/readme.en.html
+share/texlive/readme-html.dir/readme.cs.html
+share/texlive/readme-txt.dir/README.RU-koi8
+share/texlive/readme-txt.dir/README.EN
+share/texlive/readme-txt.dir/README.FR
+share/texlive/readme-txt.dir/README.SK-il2
+share/texlive/readme-txt.dir/README.SK-ascii
+share/texlive/readme-txt.dir/README.RU
+share/texlive/readme-txt.dir/README.IT
+share/texlive/readme-txt.dir/README.CS
+share/texlive/readme-txt.dir/README.JA
+share/texlive/readme-txt.dir/README.ES
+share/texlive/readme-txt.dir/README.ZH-CN
+share/texlive/readme-txt.dir/README.DE
+share/texlive/readme-txt.dir/README.PL
+share/texlive/readme-txt.dir/README.SK-cp1250
+share/texlive/readme-txt.dir/README.SR
+share/texlive/readme-txt.dir/README.PT-BR
+share/texlive/readme-txt.dir/README.RU-cp1251
+share/texlive/tl-tray-menu.exe
+share/texlive/tlpkg/tlpostcode/xetex.pl
+share/texlive/tlpkg/tlpostcode/xetex/conf/fonts.conf
+share/texlive/tlpkg/tlpostcode/xetex/conf/fonts.dtd
+share/texlive/tlpkg/tlpostcode/xetex/conf/conf.d/51-local.conf
+share/texlive/tlpkg/tlpostcode/xetex/cache/readme.txt
+share/texlive/tlpkg/tlpostcode/ptex2pdf-tlpost.pl"
