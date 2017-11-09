@@ -36,10 +36,14 @@ termux_step_extract_package() {
 		folder=${TERMUX_PKG_FOLDERNAME[$index]}
 		
 		rm -Rf $folder
-		echo "Extracting files listed in ${TL_FILE_LISTS[$index]} from $folder"
-		tar xf "$file" $(paste -d'\0' <(for i in $(seq 1 $( wc -l < $TERMUX_PKG_BUILDER_DIR/${TL_FILE_LISTS[$index]} )); do echo ${TERMUX_PKG_FOLDERNAME[$index]}/; done ) $TERMUX_PKG_BUILDER_DIR/${TL_FILE_LISTS[$index]} )
+		echo "Extracting files from $folder"
+		tar xf "$file"
 	done
 	cp -r ${TERMUX_PKG_FOLDERNAME[@]} "$TERMUX_PKG_SRCDIR"
+}
+
+termux_step_post_extract_package() {
+	rm -Rf $TERMUX_PKG_RM_AFTER_EXTRACT
 }
 
 termux_step_make() {
@@ -97,8 +101,9 @@ termux_step_create_debscripts () {
 	chmod 0755 prerm
 }
 
+# Removing after extract instead of after install to avoid elf cleaner output
 # Files to rm, first from texlive-$_MAJOR_VERSION-extra and then from install-tl-unx
-TERMUX_PKG_RM_AFTER_INSTALL="
+TERMUX_PKG_RM_AFTER_EXTRACT="
 share/texlive/README
 share/texlive/README.usergroups
 share/texlive/autorun.inf
@@ -143,4 +148,71 @@ share/texlive/tlpkg/tlpostcode/xetex/conf/fonts.dtd
 share/texlive/tlpkg/tlpostcode/xetex/conf/conf.d/51-local.conf
 share/texlive/tlpkg/tlpostcode/xetex/cache/readme.txt
 share/texlive/tlpkg/tlpostcode/ptex2pdf-tlpost.pl
+share/texlive/tlpkg/installer/tl-cmd.bat
+share/texlive/tlpkg/installer/xz/xzdec.armhf-linux
+share/texlive/tlpkg/installer/xz/xzdec.x86_64-solaris
+share/texlive/tlpkg/installer/xz/xzdec.amd64-netbsd
+share/texlive/tlpkg/installer/xz/xzdec.i386-solaris
+share/texlive/tlpkg/installer/xz/xzdec.x86_64-darwin
+share/texlive/tlpkg/installer/xz/xzdec.sparc-solaris
+share/texlive/tlpkg/installer/xz/xzdec.i386-linux
+share/texlive/tlpkg/installer/xz/xzdec.x86_64-linux
+share/texlive/tlpkg/installer/xz/xzdec.i386-darwin
+share/texlive/tlpkg/installer/xz/xzdec.i386-netbsd
+share/texlive/tlpkg/installer/xz/xzdec.powerpc-darwin
+share/texlive/tlpkg/installer/xz/xzdec.x86_64-cygwin.exe
+share/texlive/tlpkg/installer/xz/xzdec.amd64-freebsd
+share/texlive/tlpkg/installer/xz/xzdec.armel-linux
+share/texlive/tlpkg/installer/xz/xzdec.i386-freebsd
+share/texlive/tlpkg/installer/xz/xzdec.i386-cygwin.exe
+share/texlive/tlpkg/installer/xz/xzdec.powerpc-linux
+share/texlive/tlpkg/installer/xz/xzdec.x86_64-darwinlegacy
+share/texlive/tlpkg/installer/install-tl.html
+share/texlive/tlpkg/installer/installer-options.txt
+share/texlive/tlpkg/installer/install-menu-text.pl
+share/texlive/tlpkg/installer/tracked-install.pl
+share/texlive/tlpkg/installer/tl-tray-menu.ini
+share/texlive/tlpkg/installer/texlive.png
+share/texlive/tlpkg/installer/install-menu-wizard.pl
+share/texlive/tlpkg/installer/wget/wget.i386-solaris
+share/texlive/tlpkg/installer/wget/wget.amd64-netbsd
+share/texlive/tlpkg/installer/wget/wget.x86_64-solaris
+share/texlive/tlpkg/installer/wget/wget.x86_64-darwin
+share/texlive/tlpkg/installer/wget/wget.i386-netbsd
+share/texlive/tlpkg/installer/wget/wget.i386-darwin
+share/texlive/tlpkg/installer/wget/wget.amd64-freebsd
+share/texlive/tlpkg/installer/wget/wget.x86_64-darwinlegacy
+share/texlive/tlpkg/installer/wget/wget.powerpc-darwin
+share/texlive/tlpkg/installer/wget/wget.sparc-solaris
+share/texlive/tlpkg/installer/wget/wget.i386-freebsd
+share/texlive/tlpkg/installer/COPYING.MinGW-runtime.txt
+share/texlive/tlpkg/installer/install-menu-perltk.pl
+share/texlive/tlpkg/installer/ctan-mirrors.pl
+share/texlive/tlpkg/translations/cs.po
+share/texlive/tlpkg/translations/nl.po
+share/texlive/tlpkg/translations/translators
+share/texlive/tlpkg/translations/uk.po
+share/texlive/tlpkg/translations/zh_TW.po
+share/texlive/tlpkg/translations/ja.po
+share/texlive/tlpkg/translations/sl.po
+share/texlive/tlpkg/translations/pt_BR.po
+share/texlive/tlpkg/translations/vi.po
+share/texlive/tlpkg/translations/messages.pot
+share/texlive/tlpkg/translations/sk.po
+share/texlive/tlpkg/translations/ru.po
+share/texlive/tlpkg/translations/de.po
+share/texlive/tlpkg/translations/it.po
+share/texlive/tlpkg/translations/fr.po
+share/texlive/tlpkg/translations/pl.po
+share/texlive/tlpkg/translations/es.po
+share/texlive/tlpkg/translations/sr.po
+share/texlive/tlpkg/translations/zh_CN.po
+share/texlive/release-texlive.txt
+share/texlive/LICENSE.CTAN
+share/texlive/install-tl
+share/texlive/texmf-dist/scripts/texlive/tlmgrgui.pl
+share/texlive/texmf-dist/scripts/texlive/uninstall-win32.pl
+share/texlive/texmf-dist/web2c/updmap-hdr.cfg
+share/texlive/texmf-dist/web2c/fmtutil-hdr.cnf
+share/texlive/LICENSE.TL
 share/texlive/texmf-dist/web2c/texmf.cnf"
