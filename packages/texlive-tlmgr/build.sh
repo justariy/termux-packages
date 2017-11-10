@@ -1,7 +1,7 @@
 TERMUX_DESCRIPTION="TeX Lives package manager"
 TERMUX_PKG_MAINTAINER="Henrik Grimler @Grimler91"
 TERMUX_PKG_VERSION=20170524
-TERMUX_PKG_SHA256="afe49758c26fb51c2fae2e958d3f0c447b5cc22342ba4a4278119d39f5176d7f"
+TERMUX_PKG_SHA256="d4e07ed15dace1ea7fabe6d225ca45ba51f1cb7783e17850bc9fe3b890239d6d"
 TERMUX_PKG_SRCURL="ftp://ftp.tug.org/texlive/historic/${TERMUX_PKG_VERSION:0:4}/install-tl-unx.tar.gz"
 TERMUX_CONFLICTS="texlive-full"
 TERMUX_DEPENDS="perl, wget, gnupg2, xz-utils"
@@ -10,6 +10,7 @@ TERMUX_PKG_PLATFORM_INDEPENDENT=yes
 TERMUX_PKG_FOLDERNAME=install-tl-$TERMUX_PKG_VERSION
 
 TL_ROOT=$TERMUX_PREFIX/share/texlive
+TL_BINDIR=$TERMUX_PREFIX/bin
 
 termux_step_make () {
 	mkdir -p $TL_ROOT/{tlpkg/{backups,tlpobj},texmf-var/web2c}

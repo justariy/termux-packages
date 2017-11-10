@@ -23,7 +23,7 @@ termux_step_extract_package() {
 	mkdir -p "$TERMUX_PKG_SRCDIR"
 	
 	cd "$TERMUX_PKG_TMPDIR"
-	for index in $(seq 0 2); do
+	for index in $(seq 0 1); do
 		local filename
 		filename=$(basename "${TERMUX_PKG_SRCURL[$index]}")
 		local file="$TERMUX_PKG_CACHEDIR/$filename"
@@ -34,12 +34,14 @@ termux_step_extract_package() {
 		rm -Rf $folder
 		echo "Extracting files from $folder"
 		tar xf "$file"
+		echo "Done."
 	done
 	cp -r ${TERMUX_PKG_FOLDERNAME[@]} "$TERMUX_PKG_SRCDIR"
 }
 
 termux_step_make() {
-	for index in $( seq 0 2 ); do
+	for index in $( seq 0 1 ); do
+		echo "Installing ${TERMUX_PKG_FOLDERNAME[$index]}"
 		(cd $TERMUX_PKG_SRCDIR/${TERMUX_PKG_FOLDERNAME[$index]}
 		rm -Rf $TERMUX_PKG_RM_AFTER_EXTRACT)
 		cp -r $TERMUX_PKG_SRCDIR/${TERMUX_PKG_FOLDERNAME[$index]}/* $TL_ROOT/
