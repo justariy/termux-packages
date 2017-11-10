@@ -6,18 +6,14 @@ TERMUX_PKG_VERSION=${_MAJOR_VERSION}
 TERMUX_PKG_REVISION=5
 TERMUX_PKG_SRCURL=("ftp://ftp.tug.org/texlive/historic/${TERMUX_PKG_VERSION:0:4}/"\
 {"texlive-$_MAJOR_VERSION-texmf.tar.xz",\
-"texlive-$_MAJOR_VERSION-extra.tar.xz",\
-"install-tl-unx.tar.gz"})
+"texlive-$_MAJOR_VERSION-extra.tar.xz"})
 TERMUX_PKG_SHA256=("3f63708b77f8615ec6f2f7c93259c5f584d1b89dd335a28f2362aef9e6f0c9ec"
-"afe49758c26fb51c2fae2e958d3f0c447b5cc22342ba4a4278119d39f5176d7f"
-"d4e07ed15dace1ea7fabe6d225ca45ba51f1cb7783e17850bc9fe3b890239d6d")
-TERMUX_PKG_DEPENDS="wget, perl, xz-utils, gnupg2, texlive-bin (>= 20170524)"
+"afe49758c26fb51c2fae2e958d3f0c447b5cc22342ba4a4278119d39f5176d7f")
+TERMUX_PKG_DEPENDS="perl, texlive-bin (>= 20170524)"
 TERMUX_PKG_FOLDERNAME=("texlive-$_MAJOR_VERSION-texmf"
-"texlive-$_MAJOR_VERSION-extra"
-"install-tl-$_MAJOR_VERSION")
+"texlive-$_MAJOR_VERSION-extra")
 TL_FILE_LISTS=("texlive-texmf.list"
-"texlive-extra.list"
-"install-tl.list")
+"texlive-extra.list")
 TERMUX_PKG_PLATFORM_INDEPENDENT=yes
 
 TL_ROOT=$TERMUX_PREFIX/share/texlive
@@ -48,11 +44,6 @@ termux_step_make() {
 		rm -Rf $TERMUX_PKG_RM_AFTER_EXTRACT)
 		cp -r $TERMUX_PKG_SRCDIR/${TERMUX_PKG_FOLDERNAME[$index]}/* $TL_ROOT/
 	done
-	
-	mkdir -p $TL_ROOT/{tlpkg/{backups,tlpobj},texmf-var/web2c}
-	cp $TERMUX_PKG_BUILDER_DIR/texlive.tlpdb $TL_ROOT/tlpkg/
-	
-	perl -I$TL_ROOT/tlpkg/ $TL_ROOT/texmf-dist/scripts/texlive/mktexlsr.pl $TL_ROOT/texmf-dist
 }
 
 termux_step_create_debscripts () {
@@ -71,12 +62,6 @@ termux_step_create_debscripts () {
 	echo "#!$TERMUX_PREFIX/bin/bash" > postinst
 	echo "mkdir -p $TL_ROOT/{tlpkg/{backups,tlpobj},texmf-var/{web2c,tex/generic/config}}" >> postinst
 	echo "export TMPDIR=$TERMUX_PREFIX/tmp" >> postinst
-	echo "echo Updating tlmgr" >> postinst
-	echo "tlmgr update --self" >> postinst
-	echo "echo Generating language files and setting up symlinks" >> postinst
-	echo "tlmgr -q generate language" >> postinst
-	echo "mktexlsr $TL_ROOT/texmf-var" >> postinst
-	echo "texlinks" >> postinst
 	echo "echo ''" >> postinst
 	echo "echo Welcome to TeX Live!" >> postinst
 	echo "echo ''" >> postinst
@@ -213,4 +198,6 @@ texmf-dist/scripts/texlive/uninstall-win32.pl
 texmf-dist/web2c/updmap-hdr.cfg
 texmf-dist/web2c/fmtutil-hdr.cnf
 LICENSE.TL
-texmf-dist/web2c/texmf.cnf"
+texmf-dist/web2c/texmf.cnf
+tlpkg/TeXLive
+texmf-dist/scripts/texlive/tlmgr.pl"

@@ -124,17 +124,6 @@ termux_step_pre_configure() {
 	CXXFLAGS+=" -std=c++11"
 }
 
-termux_step_post_make_install () {
-	# Replace tlmgr link with a small wrapper that prevents common break on "tlmgr update --self"
-	mv $TL_BINDIR/tlmgr $TL_BINDIR/tlmgr.ln
-	echo "#!$TERMUX_PREFIX/bin/sh" > $TL_BINDIR/tlmgr
-	echo "termux-fix-shebang $TL_ROOT/texmf-dist/scripts/texlive/tlmgr.pl" >> $TL_BINDIR/tlmgr
-	echo "sed -i 's%`kpsewhich -var-value=SELFAUTOPARENT`);%`kpsewhich -var-value=TEXMFROOT`);%g' $TL_ROOT/texmf-dist/scripts/texlive/tlmgr.pl" >> $TL_BINDIR/tlmgr
-	echo "sed -E -i '"'s@`/bin/sh@`'$TERMUX_PREFIX"/bin/sh@g' ${TL_ROOT}/tlpkg/TeXLive/TLUtils.pm" >> $TL_BINDIR/tlmgr
-	echo 'tlmgr.ln "$@"' >> $TL_BINDIR/tlmgr
-	chmod 0744 $TL_BINDIR/tlmgr
-}
-
 termux_step_create_debscripts () {
 	# Clean texlive's folder if needed (run on fresh install)
 	echo "#!$TERMUX_PREFIX/bin/bash" > preinst
