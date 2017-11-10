@@ -10,6 +10,7 @@ TERMUX_PKG_SRCURL=("ftp://ftp.tug.org/texlive/historic/${TERMUX_PKG_VERSION:0:4}
 TERMUX_PKG_SHA256=("3f63708b77f8615ec6f2f7c93259c5f584d1b89dd335a28f2362aef9e6f0c9ec"
 "afe49758c26fb51c2fae2e958d3f0c447b5cc22342ba4a4278119d39f5176d7f")
 TERMUX_PKG_DEPENDS="perl, texlive-bin (>= 20170524)"
+TERMUX_PKG_RECOMMENDS="texlive-tlmgr"
 TERMUX_PKG_FOLDERNAME=("texlive-$_MAJOR_VERSION-texmf"
 "texlive-$_MAJOR_VERSION-extra")
 TL_FILE_LISTS=("texlive-texmf.list"
@@ -63,6 +64,7 @@ termux_step_create_debscripts () {
 	
 	echo "#!$TERMUX_PREFIX/bin/bash" > postinst
 	echo "mkdir -p $TL_ROOT/{tlpkg/{backups,tlpobj},texmf-var/{web2c,tex/generic/config}}" >> postinst
+	echo "mktexlsr $TL_ROOT/texmf-dist" >> postinst
 	echo "export TMPDIR=$TERMUX_PREFIX/tmp" >> postinst
 	echo "echo ''" >> postinst
 	echo "echo Welcome to TeX Live!" >> postinst

@@ -1,3 +1,4 @@
+TERMUX_PKG_HOMEPAGE=https://www.tug.org/texlive/
 TERMUX_DESCRIPTION="TeX Lives package manager"
 TERMUX_PKG_MAINTAINER="Henrik Grimler @Grimler91"
 TERMUX_PKG_VERSION=20170524
@@ -5,7 +6,6 @@ TERMUX_PKG_SHA256="d4e07ed15dace1ea7fabe6d225ca45ba51f1cb7783e17850bc9fe3b890239
 TERMUX_PKG_SRCURL="ftp://ftp.tug.org/texlive/historic/${TERMUX_PKG_VERSION:0:4}/install-tl-unx.tar.gz"
 TERMUX_CONFLICTS="texlive-full"
 TERMUX_DEPENDS="perl, wget, gnupg2, xz-utils"
-#TERMUX_RECOMMENDS=
 TERMUX_PKG_PLATFORM_INDEPENDENT=yes
 TERMUX_PKG_FOLDERNAME=install-tl-$TERMUX_PKG_VERSION
 
@@ -38,6 +38,7 @@ termux_step_create_debscript () {
 	echo "echo Generating language files and setting up symlinks" >> postinst
 	echo "tlmgr -q generate language" >> postinst
 	echo "mktexlsr $TL_ROOT/texmf-var" >> postinst
+	echo "mktexlsr $TL_ROOT/texmf-dist" >> postinst
 	echo "texlinks" >> postinst
 	echo "exit 0" >> postinst
 	chmod 0755 postinst
