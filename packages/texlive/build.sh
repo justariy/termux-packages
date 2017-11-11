@@ -84,7 +84,7 @@ termux_step_create_debscripts () {
 }
 
 # Removing after extract instead of after install to avoid elf cleaner output
-# Files to rm, first from texlive-$_MAJOR_VERSION-extra and then from install-tl-unx
+# Files to rm, first from texlive-$_MAJOR_VERSION-extra
 TERMUX_PKG_RM_AFTER_EXTRACT="
 autorun.inf
 doc.html
