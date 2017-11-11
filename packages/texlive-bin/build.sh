@@ -108,6 +108,7 @@ share/texlive/texmf-dist/scripts/texlive/tlmgr.pl
 share/texlive/texmf-dist/scripts/texlive/updmap-sys.sh
 share/texlive/texmf-dist/scripts/texlive/updmap.pl
 share/texlive/texmf-dist/scripts/simpdftex/simpdftex
+share/texlive/texmf-dist/scripts/tex4ht/xhlatex.sh
 share/texlive/texmf-dist/fonts/cmap/dvipdfmx/EUC-UCS2
 share/texlive/texmf-dist/fonts/map/glyphlist/pdfglyphlist.txt
 share/texlive/texmf-dist/fonts/map/glyphlist/glyphlist.txt
