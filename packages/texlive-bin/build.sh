@@ -127,8 +127,10 @@ termux_step_pre_configure() {
 
 termux_step_post_make_install () {
 	unlink $TL_BINDIR/tlmgr
-	# unlink man -> mandoc symlink, clashes with man package
-	unlink $TL_BINDIR/man
+	# unlink man -> mandoc symlink, clashes with man package (doesn't seem to be included in package everytime, I have no idea why)
+	if [ -L $TL_BINDIR/man ]; then
+		unlink $TL_BINDIR/man
+	fi
 }
 
 termux_step_create_debscripts () {
