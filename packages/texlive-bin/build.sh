@@ -7,7 +7,7 @@ TERMUX_PKG_SRCURL=ftp://tug.org/historic/systems/texlive/${TERMUX_PKG_VERSION:0:
 TERMUX_PKG_SHA256="0161695304e941334dc0b3b5dabcf8edf46c09b7bc33eea8229b5ead7ccfb2aa"
 TERMUX_PKG_DEPENDS="freetype, libpng, libgd, libgmp, libmpfr, libicu, liblua, poppler, libgraphite, harfbuzz-icu, perl, teckit"
 TERMUX_PKG_BUILD_DEPENDS="icu-devtools"
-TERMUX_PKG_BREAKS="texlive (<< 20170524-3)"
+TERMUX_PKG_BREAKS="texlive (<< 20170524-5)"
 TERMUX_PKG_REPLACES="texlive (<< 20170524-3)"
 TERMUX_PKG_RECOMMENDS="texlive"
 TERMUX_PKG_NO_DEVELSPLIT=yes
@@ -16,59 +16,59 @@ TL_ROOT=$TERMUX_PREFIX/share/texlive
 TL_BINDIR=$TERMUX_PREFIX/bin
 
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
-AR=ar \
-RANLIB=ranlib \
-BUILDAR=ar \
-BUILDRANLIB=ranlib \
-ac_cv_c_bigendian=no \
---prefix=$TL_ROOT \
---bindir=$TL_BINDIR \
---datarootdir=$TL_ROOT \
---datadir=$TERMUX_PREFIX/share \
---mandir=$TERMUX_PREFIX/share/man \
---docdir=$TERMUX_PREFIX/share/doc \
---infodir=$TERMUX_PREFIX/share/info \
---libdir=$TERMUX_PREFIX/lib \
---includedir=$TERMUX_PREFIX/include \
---build=$TERMUX_BUILD_TUPLE \
---enable-ttfdump=no \
---enable-makeindexk=yes \
---enable-makejvf=no \
---enable-mendexk=no \
---enable-musixtnt=no \
---enable-ps2pk=no \
---enable-seetexk=no \
---enable-gregorio=no \
---disable-native-texlive-build \
---disable-bibtexu \
---disable-dvisvgm \
---disable-dialog \
---disable-psutils \
---disable-multiplatform \
---disable-t1utils \
---enable-luatex \
---disable-luajittex \
---disable-mflua \
---disable-mfluajit \
---disable-xz \
---disable-pmx \
---without-texinfo \
---without-xdvipdfmx \
---without-texi2html \
---with-system-cairo \
---with-system-graphite2 \
---with-system-harfbuzz \
---with-system-gd \
---with-system-gmp \
---with-system-icu \
---with-system-lua \
---with-system-mpfr \
---with-system-poppler \
---with-system-zlib \
---with-system-xpdf \
---with-system-lua \
---with-system-teckit \
---without-x \
+AR=ar
+RANLIB=ranlib
+BUILDAR=ar
+BUILDRANLIB=ranlib
+ac_cv_c_bigendian=no
+--prefix=$TL_ROOT
+--bindir=$TL_BINDIR
+--datarootdir=$TL_ROOT
+--datadir=$TERMUX_PREFIX/share
+--mandir=$TERMUX_PREFIX/share/man
+--docdir=$TERMUX_PREFIX/share/doc
+--infodir=$TERMUX_PREFIX/share/info
+--libdir=$TERMUX_PREFIX/lib
+--includedir=$TERMUX_PREFIX/include
+--build=$TERMUX_BUILD_TUPLE
+--enable-ttfdump=no
+--enable-makeindexk=yes
+--enable-makejvf=no
+--enable-mendexk=no
+--enable-musixtnt=no
+--enable-ps2pk=no
+--enable-seetexk=no
+--enable-gregorio=no
+--disable-native-texlive-build
+--disable-bibtexu
+--disable-dvisvgm
+--disable-dialog
+--disable-psutils
+--disable-multiplatform
+--disable-t1utils
+--enable-luatex
+--disable-luajittex
+--disable-mflua
+--disable-mfluajit
+--disable-xz
+--disable-pmx
+--without-texinfo
+--without-xdvipdfmx
+--without-texi2html
+--with-system-cairo
+--with-system-graphite2
+--with-system-harfbuzz
+--with-system-gd
+--with-system-gmp
+--with-system-icu
+--with-system-lua
+--with-system-mpfr
+--with-system-poppler
+--with-system-zlib
+--with-system-xpdf
+--with-system-lua
+--with-system-teckit
+--without-x
 --with-banner-add=/Termux"
 
 # These files are provided by texlive:
