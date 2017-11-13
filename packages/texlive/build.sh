@@ -7,7 +7,7 @@ TERMUX_PKG_REVISION=5
 TERMUX_PKG_SRCURL=("ftp://ftp.tug.org/texlive/historic/${TERMUX_PKG_VERSION:0:4}/texlive-$_MAJOR_VERSION-texmf.tar.xz" "ftp://ftp.tug.org/texlive/historic/${TERMUX_PKG_VERSION:0:4}/texlive-$_MAJOR_VERSION-extra.tar.xz")
 TERMUX_PKG_SHA256=("3f63708b77f8615ec6f2f7c93259c5f584d1b89dd335a28f2362aef9e6f0c9ec"
 "afe49758c26fb51c2fae2e958d3f0c447b5cc22342ba4a4278119d39f5176d7f")
-TERMUX_PKG_DEPENDS="perl, texlive-bin (>= 20170524-7)"
+TERMUX_PKG_DEPENDS="perl, texlive-bin (>= 20170524-8)"
 TERMUX_PKG_RECOMMENDS="texlive-tlmgr"
 TERMUX_PKG_CONFLICTS="texlive (<< 20170524-5)"
 TERMUX_PKG_FOLDERNAME=("texlive-$_MAJOR_VERSION-texmf"
