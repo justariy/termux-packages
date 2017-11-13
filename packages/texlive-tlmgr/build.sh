@@ -65,7 +65,7 @@ termux_step_create_debscripts () {
 
 	# Don't remove installed stuff on removal, do that in the pkg texlive instead. Remove backup files though:
 	echo "#!$TERMUX_PREFIX/bin/bash" > prerm
-	echo "Removing temporary and backup files" >> prerm
+	echo "echo Removing temporary and backup files" >> prerm
 	echo "rm -rf $TL_ROOT/tlpkg/{texlive.tlpdb.*,tlpobj,backups}" >> prerm
 	echo "" >> prerm
 	echo "exit 0" >> prerm
