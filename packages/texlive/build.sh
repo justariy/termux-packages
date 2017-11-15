@@ -1,17 +1,16 @@
 TERMUX_PKG_HOMEPAGE=https://www.tug.org/texlive/
 TERMUX_PKG_DESCRIPTION="TeX Live is a distribution of the TeX typesetting system."
 TERMUX_PKG_MAINTAINER="Henrik Grimler @Grimler91"
-_MAJOR_VERSION=20170524
-TERMUX_PKG_VERSION=${_MAJOR_VERSION}
+TERMUX_PKG_VERSION=20170524
 TERMUX_PKG_REVISION=5
-TERMUX_PKG_SRCURL=("ftp://ftp.tug.org/texlive/historic/${TERMUX_PKG_VERSION:0:4}/texlive-$_MAJOR_VERSION-texmf.tar.xz" "ftp://ftp.tug.org/texlive/historic/${TERMUX_PKG_VERSION:0:4}/texlive-$_MAJOR_VERSION-extra.tar.xz")
+TERMUX_PKG_SRCURL=("ftp://ftp.tug.org/texlive/historic/${TERMUX_PKG_VERSION:0:4}/texlive-$TERMUX_PKG_VERSION-texmf.tar.xz" "ftp://ftp.tug.org/texlive/historic/${TERMUX_PKG_VERSION:0:4}/texlive-$TERMUX_PKG_VERSION-extra.tar.xz")
 TERMUX_PKG_SHA256=("3f63708b77f8615ec6f2f7c93259c5f584d1b89dd335a28f2362aef9e6f0c9ec"
 "afe49758c26fb51c2fae2e958d3f0c447b5cc22342ba4a4278119d39f5176d7f")
 TERMUX_PKG_DEPENDS="perl, texlive-bin (>= 20170524-8)"
 TERMUX_PKG_RECOMMENDS="texlive-tlmgr"
 TERMUX_PKG_CONFLICTS="texlive (<< 20170524-5)"
-TERMUX_PKG_FOLDERNAME=("texlive-$_MAJOR_VERSION-texmf"
-"texlive-$_MAJOR_VERSION-extra")
+TERMUX_PKG_FOLDERNAME=("texlive-$TERMUX_PKG_VERSION-texmf"
+"texlive-$TERMUX_PKG_VERSION-extra")
 TL_FILE_LISTS=("texlive-texmf.list"
 "texlive-extra.list")
 TERMUX_PKG_PLATFORM_INDEPENDENT=yes
@@ -85,7 +84,7 @@ termux_step_create_debscripts () {
 }
 
 # Removing after extract instead of after install to avoid elf cleaner output
-# Files to rm, first from texlive-$_MAJOR_VERSION-extra
+# Files to rm, first from texlive-$TERMUX_PKG_VERSION-extra
 TERMUX_PKG_RM_AFTER_EXTRACT="
 autorun.inf
 doc.html
@@ -406,4 +405,5 @@ texmf-dist/scripts/vpe/vpe.pl
 texmf-dist/scripts/yplan/yplan
 texmf-dist/source/fonts/zhmetrics/ttfonts.map
 texmf-dist/ttf2pk/VPS.rpl
-texmf-dist/ttf2pk/ttf2pk.cfg"
+texmf-dist/ttf2pk/ttf2pk.cfg
+texmf-dist/ls-R"
