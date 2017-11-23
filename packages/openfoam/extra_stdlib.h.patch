@@ -1,0 +1,22 @@
+--- /dev/null	2017-11-23 07:35:37.450232380 +0000
++++ ./src/OSspecific/POSIX/extra_stdlib.h	2017-11-23 13:54:06.733231984 +0000
+@@ -0,0 +1,19 @@
++// Taken from valgrind/perf/test_for_tinycc.c
++struct drand48_data
++  {
++    unsigned short int __x[3];
++    unsigned short int __old_x[3];
++    unsigned short int __c;
++    unsigned short int __init;
++    unsigned long long int __a;
++  };
++
++extern int drand48_r (struct drand48_data *__restrict __buffer,
++        double *__restrict __result) __attribute__ ((__nothrow__)) __attribute__ ((__nonnull__ (1, 2)));
++
++extern int lrand48_r (struct drand48_data *__restrict __buffer,
++        long int *__restrict __result)
++     __attribute__ ((__nothrow__)) __attribute__ ((__nonnull__ (1, 2)));
++
++extern int srand48_r (long int __seedval, struct drand48_data *__buffer)
++     __attribute__ ((__nothrow__)) __attribute__ ((__nonnull__ (2)));
