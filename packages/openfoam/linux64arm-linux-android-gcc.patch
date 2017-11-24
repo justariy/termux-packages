@@ -80,7 +80,7 @@
 +++ ./wmake/rules/linux64arm-linux-androideabi-gcc/general	2017-08-30 14:14:55.455582341 +0000
 @@ -0,0 +1,9 @@
 +CPP        = cpp -traditional-cpp $(GFLAGS)
-+LD         = ld
++LD         ?= ld
 +
 +PROJECT_LIBS = -l$(WM_PROJECT) -ldl
 +
