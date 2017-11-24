@@ -1,0 +1,26 @@
+--- ./src/OpenFOAM/db/dictionary/functionEntries/codeStream/codeStream.C	2017-06-30 08:50:14.000000000 +0000
++++ ../codeStream.C	2017-11-23 20:05:12.118497735 +0000
+@@ -234,8 +234,8 @@
+             //  We do this by just polling a few times using the
+             //  fileModificationSkew.
+ 
+-            off_t mySize = Foam::fileSize(libPath);
+-            off_t masterSize = mySize;
++            off64_t mySize = Foam::fileSize(libPath);
++            off64_t masterSize = mySize;
+             Pstream::scatter(masterSize);
+ 
+             if (debug)
+--- ./src/OpenFOAM/db/dynamicLibrary/codedBase/codedBase.C	2017-06-30 08:50:14.000000000 +0000
++++ ../codedBase.C	2017-11-23 20:15:07.054558301 +0000
+@@ -258,8 +258,8 @@
+ 
+         const fileName libPath = dynCode.libPath();
+ 
+-        off_t mySize = Foam::fileSize(libPath);
+-        off_t masterSize = mySize;
++        off64_t mySize = Foam::fileSize(libPath);
++        off64_t masterSize = mySize;
+         Pstream::scatter(masterSize);
+ 
+         if (debug)
