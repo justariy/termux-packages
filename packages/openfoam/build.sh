@@ -4,7 +4,7 @@ TERMUX_PKG_MAINTAINER="Henrik Grimler @Grimler91"
 TERMUX_PKG_VERSION=1706
 TERMUX_PKG_SRCURL="https://sourceforge.net/projects/openfoamplus/files/v$TERMUX_PKG_VERSION/OpenFOAM-v$TERMUX_PKG_VERSION.tgz"
 TERMUX_PKG_SHA256="7779048bb53798d9a5bd2b2be0bf302c5fd3dff98e29249d6e0ef7eeb83db79a"
-TERMUX_PKG_DEPENDS="openmpi, flex"
+TERMUX_PKG_DEPENDS="openmpi, flex, boost"
 TERMUX_PKG_CLANG=no
 TERMUX_PKG_BUILD_IN_SRC=yes
 
