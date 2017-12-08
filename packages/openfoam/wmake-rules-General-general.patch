@@ -1,6 +1,6 @@
 --- ./wmake/rules/General/general	2017-06-30 08:50:14.000000000 +0000
 +++ ../general	2017-08-30 17:35:25.167100785 +0000
-@@ -1,17 +1,17 @@
+@@ -1,17 +1,18 @@
  #-------------------------------*- makefile -*---------------------------------
  WM_VERSION = OPENFOAM_PLUS=1706
  
@@ -22,6 +22,7 @@
  GLIBS      = -lm
 -GLIB_LIBS  =
 +GLIB_LIBS  = -L@TERMUX_PREFIX@/lib
++LINK_LIBS  = -L@TERMUX_PREFIX@/lib
  
  
  COMPILER_TYPE   = $(shell echo $(WM_COMPILER) | tr -d [:digit:])
