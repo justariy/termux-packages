@@ -13,7 +13,7 @@
 +
 +ctoo        = $(WM_SCHEDULER) $(cc) $(cFLAGS) -c $< -o $@
 +
-+LINK_LIBS   = $(cDBUG)
++LINK_LIBS   = $(cDBUG) -L@TERMUX_PREFIX@/lib
 +
 +LINKLIBSO   = $(cc) -shared
 +LINKEXE     = $(cc) -Xlinker -z -Xlinker nodefs
@@ -40,7 +40,7 @@
 +cctoo       = $(Ctoo)
 +cpptoo      = $(Ctoo)
 +
-+LINK_LIBS   = $(c++DBUG)
++LINK_LIBS   = $(c++DBUG) -L@TERMUX_PREFIX@/lib
 +
 +LINKLIBSO   = $(CC) $(c++FLAGS) -shared -Xlinker
 +LINKEXE     = $(CC) $(c++FLAGS) -Xlinker
