@@ -1,0 +1,26 @@
+--- ./wmake/makefiles/general	2017-06-30 08:50:14.000000000 +0000
++++ ../general	2017-12-01 22:56:52.761253031 +0000
+@@ -58,18 +58,18 @@
+ LIB_PLATFORMS   = $(WM_PROJECT_DIR)/platforms/$(WM_OPTIONS)/lib
+ OBJECTS_DIR     = $(MAKE_DIR)/$(WM_OPTIONS)
+ 
+-SYS_INC         =
+-SYS_LIBS        =
++SYS_INC         = -I@TERMUX_PREFIX@/include
++SYS_LIBS        = -L@TERMUX_PREFIX@/lib
+ 
+ PROJECT_INC     = -I$(LIB_SRC)/$(WM_PROJECT)/lnInclude \
+ 		     -I$(LIB_SRC)/OSspecific/$(WM_OSTYPE)/lnInclude
+ 
+ PROJECT_LIBS    = -l$(WM_PROJECT)
+ 
+-EXE_INC         =
+-EXE_LIBS        =
++EXE_INC         = -I@TERMUX_PREFIX@/include
++EXE_LIBS        = -L@TERMUX_PREFIX@/lib
+ 
+-LIB_LIBS        =
++LIB_LIBS        = -L@TERMUX_PREFIX@/lib
+ 
+ 
+ #------------------------------------------------------------------------------
