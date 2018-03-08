@@ -1,0 +1,11 @@
+--- ./dwarfexample/Makefile.in	2017-12-17 14:42:44.000000000 +0000
++++ ../dwarfexample-Makefile.in	2018-03-08 21:02:43.165884317 +0000
+@@ -36,7 +36,7 @@
+ dwfzlib =       @dwfzlib@
+ LIBS =		@LIBS@ -L../libdwarf -ldwarf -lelf $(dwfzlib)
+ INCLUDES =	-I. -I$(srcdir) -I../libdwarf -I$(srcdir)/../libdwarf
+-CFLAGS =	$(PREINCS) @CPPFLAGS@  @CFLAGS@ $(INCLUDES) \
++CFLAGS =	$(INCLUDES) $(PREINCS) @CPPFLAGS@  @CFLAGS@ \
+                 $(dwfwall) $(dwfsanitize) -DCONFPREFIX=${libdir} $(POSTINCS)
+ LDFLAGS =	$(PRELIBS) @LDFLAGS@ $(dwfsanitize) $(LIBS) $(POSTLIBS)
+ #VG =            valgrind --leak-check=full

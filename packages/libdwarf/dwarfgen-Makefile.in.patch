@@ -1,0 +1,13 @@
+--- ./dwarfgen/Makefile.in	2017-05-27 16:38:35.000000000 +0000
++++ ../dwarfgen-Makefile.in	2018-03-08 20:55:02.882305197 +0000
+@@ -30,8 +30,8 @@
+ dwfzlib =       @dwfzlib@
+ LIBS =          @LIBS@ -L ../libdwarf -ldwarf -lelf $(dwfzlib)
+ INCLUDES =      -I. -I$(srcdir) -I../libdwarf -I$(srcdir)/../libdwarf
+-CXXFLAGS =      @CPPFLAGS@ @CXXFLAGS@ $(dwfsanitize) $(INCLUDES) 
+-CFLAGS =        @CPPFLAGS@ @CFLAGS@ $(dwfsanitize) $(INCLUDES) 
++CXXFLAGS =      $(INCLUDES) @CPPFLAGS@ @CXXFLAGS@ $(dwfsanitize)
++CFLAGS =        $(INCLUDES) @CPPFLAGS@ @CFLAGS@ $(dwfsanitize)
+ LDFLAGS =       @LDFLAGS@ $(dwfsanitize) $(LIBS)
+ 
+ 
