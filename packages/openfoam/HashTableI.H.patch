@@ -1,0 +1,20 @@
+--- ../HashTableI.H.orig	2018-09-15 11:04:01.578604452 +0200
++++ ./src/OpenFOAM/containers/HashTables/HashTable/HashTableI.H	2018-09-15 11:04:21.710565497 +0200
+@@ -375,7 +375,7 @@
+ 
+ template<class T, class Key, class Hash>
+ template<class WrappedIterator>
+-inline Foam::HashTable<T, Key, Hash>::key_iterator_base<WrappedIterator>&
++inline typename Foam::HashTable<T, Key, Hash>::template key_iterator_base<WrappedIterator>&
+ Foam::HashTable<T, Key, Hash>::key_iterator_base<WrappedIterator>
+ ::operator++()
+ {
+@@ -386,7 +386,7 @@
+ 
+ template<class T, class Key, class Hash>
+ template<class WrappedIterator>
+-inline Foam::HashTable<T, Key, Hash>::key_iterator_base<WrappedIterator>
++inline typename Foam::HashTable<T, Key, Hash>::template key_iterator_base<WrappedIterator>
+ Foam::HashTable<T, Key, Hash>::key_iterator_base<WrappedIterator>
+ ::operator++(int)
+ {

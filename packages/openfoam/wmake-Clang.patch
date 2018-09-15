@@ -1,0 +1,287 @@
+diff --git a/wmake/rules/linuxAArch64Clang/c b/wmake/rules/linuxAArch64Clang/c
+new file mode 100644
+index 000000000..882020335
+--- /dev/null
++++ b/wmake/rules/linuxAArch64Clang/c
+@@ -0,0 +1,16 @@
++SUFFIXES += .c
++
++cWARN        = -Wall
++
++cc          = $(WM_CC) -m64
++
++include $(DEFAULT_RULES)/c$(WM_COMPILE_OPTION)
++
++cFLAGS      = $(GFLAGS) $(cWARN) $(cOPT) $(cDBUG) $(LIB_HEADER_DIRS) -fPIC
++
++ctoo        = $(WM_SCHEDULER) $(cc) $(cFLAGS) -c $< -o $@
++
++LINK_LIBS   = $(cDBUG) -L$(PREFIX)/lib
++
++LINKLIBSO   = $(cc) -shared
++LINKEXE     = $(cc) -Xlinker --add-needed -Xlinker -z -Xlinker nodefs
+diff --git a/wmake/rules/linuxAArch64Clang/c++ b/wmake/rules/linuxAArch64Clang/c++
+new file mode 100644
+index 000000000..e0bfb61d4
+--- /dev/null
++++ b/wmake/rules/linuxAArch64Clang/c++
+@@ -0,0 +1,24 @@
++SUFFIXES += .C
++
++c++WARN     = -Wall -Wextra -Wold-style-cast -Wnon-virtual-dtor -Wno-unused-parameter -Wno-invalid-offsetof -Wno-undefined-var-template
++
++# Suppress some warnings for flex++ and CGAL
++c++LESSWARN = -Wno-old-style-cast -Wno-unused-local-typedefs -Wno-tautological-undefined-compare -Wno-shift-negative-value
++
++CC          = $(WM_CXX) -std=c++11 -m64
++
++include $(DEFAULT_RULES)/c++$(WM_COMPILE_OPTION)
++
++ptFLAGS     = -DNoRepository -ftemplate-depth-100
++
++c++FLAGS    = $(GFLAGS) $(c++WARN) $(c++OPT) $(c++DBUG) $(ptFLAGS) $(LIB_HEADER_DIRS) -fPIC
++
++Ctoo        = $(WM_SCHEDULER) $(CC) $(c++FLAGS) -c $< -o $@
++cxxtoo      = $(Ctoo)
++cctoo       = $(Ctoo)
++cpptoo      = $(Ctoo)
++
++LINK_LIBS   = $(c++DBUG) -L$(PREFIX)/lib
++
++LINKLIBSO   = $(WM_CC) $(c++FLAGS) -shared
++LINKEXE     = $(WM_CC) $(c++FLAGS) -Xlinker --add-needed
+diff --git a/wmake/rules/linuxAArch64Clang/c++Debug b/wmake/rules/linuxAArch64Clang/c++Debug
+new file mode 100644
+index 000000000..1c63335a3
+--- /dev/null
++++ b/wmake/rules/linuxAArch64Clang/c++Debug
+@@ -0,0 +1,2 @@
++c++DBUG    = -g -DFULLDEBUG
++c++OPT      = -O0
+diff --git a/wmake/rules/linuxAArch64Clang/c++Opt b/wmake/rules/linuxAArch64Clang/c++Opt
+new file mode 100644
+index 000000000..2aedabd62
+--- /dev/null
++++ b/wmake/rules/linuxAArch64Clang/c++Opt
+@@ -0,0 +1,2 @@
++c++DBUG     =
++c++OPT      = -O3
+diff --git a/wmake/rules/linuxAArch64Clang/c++Prof b/wmake/rules/linuxAArch64Clang/c++Prof
+new file mode 100644
+index 000000000..3bda4dad5
+--- /dev/null
++++ b/wmake/rules/linuxAArch64Clang/c++Prof
+@@ -0,0 +1,2 @@
++c++DBUG    = -pg
++c++OPT     = -O2
+diff --git a/wmake/rules/linuxAArch64Clang/cDebug b/wmake/rules/linuxAArch64Clang/cDebug
+new file mode 100644
+index 000000000..7b7adf10d
+--- /dev/null
++++ b/wmake/rules/linuxAArch64Clang/cDebug
+@@ -0,0 +1,2 @@
++cDBUG       = -g -DFULLDEBUG
++cOPT        = -O0
+diff --git a/wmake/rules/linuxAArch64Clang/cOpt b/wmake/rules/linuxAArch64Clang/cOpt
+new file mode 100644
+index 000000000..17318709f
+--- /dev/null
++++ b/wmake/rules/linuxAArch64Clang/cOpt
+@@ -0,0 +1,2 @@
++cDBUG       =
++cOPT        = -O3
+diff --git a/wmake/rules/linuxAArch64Clang/cProf b/wmake/rules/linuxAArch64Clang/cProf
+new file mode 100644
+index 000000000..ca3ac9bf5
+--- /dev/null
++++ b/wmake/rules/linuxAArch64Clang/cProf
+@@ -0,0 +1,2 @@
++cDBUG       = -pg
++cOPT        = -O2
+diff --git a/wmake/rules/linuxAArch64Clang/general b/wmake/rules/linuxAArch64Clang/general
+new file mode 100644
+index 000000000..1002cb169
+--- /dev/null
++++ b/wmake/rules/linuxAArch64Clang/general
+@@ -0,0 +1,8 @@
++CPP        = cpp -traditional-cpp $(GFLAGS)
++
++PROJECT_LIBS = -l$(WM_PROJECT) -ldl
++
++include $(GENERAL_RULES)/standard
++
++include $(DEFAULT_RULES)/c
++include $(DEFAULT_RULES)/c++
+diff --git a/wmake/rules/linuxAArch64Clang/mplibHPMPI b/wmake/rules/linuxAArch64Clang/mplibHPMPI
+new file mode 100644
+index 000000000..d7c4b0cf3
+--- /dev/null
++++ b/wmake/rules/linuxAArch64Clang/mplibHPMPI
+@@ -0,0 +1,3 @@
++PFLAGS     =
++PINC       = -isystem $(MPI_ARCH_PATH)/include -D_MPICC_H
++PLIBS      = -L$(MPI_ARCH_PATH)/lib/linux_amd64 -lmpi
+diff --git a/wmake/rules/linuxAArch64Clang/mplibINTELMPI b/wmake/rules/linuxAArch64Clang/mplibINTELMPI
+new file mode 100644
+index 000000000..278e0b0f2
+--- /dev/null
++++ b/wmake/rules/linuxAArch64Clang/mplibINTELMPI
+@@ -0,0 +1,3 @@
++PFLAGS     = -DMPICH_SKIP_MPICXX
++PINC       = -isystem $(MPI_ARCH_PATH)/include64
++PLIBS      = -L$(MPI_ARCH_PATH)/lib64 -lmpi
+diff --git a/wmake/rules/linuxARM7Clang/c b/wmake/rules/linuxARM7Clang/c
+new file mode 100644
+index 000000000..361976c39
+--- /dev/null
++++ b/wmake/rules/linuxARM7Clang/c
+@@ -0,0 +1,16 @@
++SUFFIXES += .c
++
++cWARN        = -Wall
++
++cc          = $(WM_CC)
++
++include $(DEFAULT_RULES)/c$(WM_COMPILE_OPTION)
++
++cFLAGS      = $(GFLAGS) $(cWARN) $(cOPT) $(cDBUG) $(LIB_HEADER_DIRS) -fPIC
++
++ctoo        = $(WM_SCHEDULER) $(cc) $(cFLAGS) -c $< -o $@
++
++LINK_LIBS   = $(cDBUG) -L@TERMUX_PREFIX@/lib
++
++LINKLIBSO   = $(cc) -shared
++LINKEXE     = $(cc) -Xlinker --add-needed -Xlinker -z -Xlinker nodefs
+diff --git a/wmake/rules/linuxARM7Clang/c++ b/wmake/rules/linuxARM7Clang/c++
+new file mode 100644
+index 000000000..522b8bada
+--- /dev/null
++++ b/wmake/rules/linuxARM7Clang/c++
+@@ -0,0 +1,24 @@
++SUFFIXES += .C
++
++c++WARN     = -Wall -Wextra -Wold-style-cast -Wnon-virtual-dtor -Wno-unused-parameter -Wno-invalid-offsetof -Wno-undefined-var-template
++
++# Suppress some warnings for flex++ and CGAL
++c++LESSWARN = -Wno-old-style-cast -Wno-unused-local-typedefs -Wno-tautological-undefined-compare -Wno-shift-negative-value
++
++CC          = $(WM_CXX) -std=c++11
++
++include $(DEFAULT_RULES)/c++$(WM_COMPILE_OPTION)
++
++ptFLAGS     = -DNoRepository -ftemplate-depth-100
++
++c++FLAGS    = $(GFLAGS) $(c++WARN) $(c++OPT) $(c++DBUG) $(ptFLAGS) $(LIB_HEADER_DIRS) -fPIC
++
++Ctoo        = $(WM_SCHEDULER) $(CC) $(c++FLAGS) -c $< -o $@
++cxxtoo      = $(Ctoo)
++cctoo       = $(Ctoo)
++cpptoo      = $(Ctoo)
++
++LINK_LIBS   = $(c++DBUG)
++
++LINKLIBSO   = $(WM_CC) $(c++FLAGS) -shared
++LINKEXE     = $(WM_CC) $(c++FLAGS) -Xlinker --add-needed
+diff --git a/wmake/rules/linuxARM7Clang/c++Debug b/wmake/rules/linuxARM7Clang/c++Debug
+new file mode 100644
+index 000000000..1c63335a3
+--- /dev/null
++++ b/wmake/rules/linuxARM7Clang/c++Debug
+@@ -0,0 +1,2 @@
++c++DBUG    = -g -DFULLDEBUG
++c++OPT      = -O0
+diff --git a/wmake/rules/linuxARM7Clang/c++Opt b/wmake/rules/linuxARM7Clang/c++Opt
+new file mode 100644
+index 000000000..2aedabd62
+--- /dev/null
++++ b/wmake/rules/linuxARM7Clang/c++Opt
+@@ -0,0 +1,2 @@
++c++DBUG     =
++c++OPT      = -O3
+diff --git a/wmake/rules/linuxARM7Clang/c++Prof b/wmake/rules/linuxARM7Clang/c++Prof
+new file mode 100644
+index 000000000..3bda4dad5
+--- /dev/null
++++ b/wmake/rules/linuxARM7Clang/c++Prof
+@@ -0,0 +1,2 @@
++c++DBUG    = -pg
++c++OPT     = -O2
+diff --git a/wmake/rules/linuxARM7Clang/cDebug b/wmake/rules/linuxARM7Clang/cDebug
+new file mode 100644
+index 000000000..7b7adf10d
+--- /dev/null
++++ b/wmake/rules/linuxARM7Clang/cDebug
+@@ -0,0 +1,2 @@
++cDBUG       = -g -DFULLDEBUG
++cOPT        = -O0
+diff --git a/wmake/rules/linuxARM7Clang/cOpt b/wmake/rules/linuxARM7Clang/cOpt
+new file mode 100644
+index 000000000..17318709f
+--- /dev/null
++++ b/wmake/rules/linuxARM7Clang/cOpt
+@@ -0,0 +1,2 @@
++cDBUG       =
++cOPT        = -O3
+diff --git a/wmake/rules/linuxARM7Clang/cProf b/wmake/rules/linuxARM7Clang/cProf
+new file mode 100644
+index 000000000..ca3ac9bf5
+--- /dev/null
++++ b/wmake/rules/linuxARM7Clang/cProf
+@@ -0,0 +1,2 @@
++cDBUG       = -pg
++cOPT        = -O2
+diff --git a/wmake/rules/linuxARM7Clang/general b/wmake/rules/linuxARM7Clang/general
+new file mode 100644
+index 000000000..c1325ef89
+--- /dev/null
++++ b/wmake/rules/linuxARM7Clang/general
+@@ -0,0 +1,9 @@
++CPP        = cpp -traditional-cpp $(GFLAGS)
++LD         ?= ld
++
++PROJECT_LIBS = -l$(WM_PROJECT) -ldl
++
++include $(GENERAL_RULES)/standard
++
++include $(DEFAULT_RULES)/c
++include $(DEFAULT_RULES)/c++
+diff --git a/wmake/rules/linuxARM7Clang/mplibHPMPI b/wmake/rules/linuxARM7Clang/mplibHPMPI
+new file mode 100644
+index 000000000..d7c4b0cf3
+--- /dev/null
++++ b/wmake/rules/linuxARM7Clang/mplibHPMPI
+@@ -0,0 +1,3 @@
++PFLAGS     =
++PINC       = -isystem $(MPI_ARCH_PATH)/include -D_MPICC_H
++PLIBS      = -L$(MPI_ARCH_PATH)/lib/linux_amd64 -lmpi
+diff --git a/wmake/rules/linuxARM7Clang/mplibINTELMPI b/wmake/rules/linuxARM7Clang/mplibINTELMPI
+new file mode 100644
+index 000000000..278e0b0f2
+--- /dev/null
++++ b/wmake/rules/linuxARM7Clang/mplibINTELMPI
+@@ -0,0 +1,3 @@
++PFLAGS     = -DMPICH_SKIP_MPICXX
++PINC       = -isystem $(MPI_ARCH_PATH)/include64
++PLIBS      = -L$(MPI_ARCH_PATH)/lib64 -lmpi
+# diff --git a/etc/config.sh/settings b/etc/config.sh/settings
+# index 64d675d6d..6ce522992 100644
+# --- a/etc/config.sh/settings
+# +++ b/etc/config.sh/settings
+# @@ -110,6 +110,16 @@ Linux)
+#          export WM_LDFLAGS='-m64'
+#          ;;
+#  
+# +    aarch64)
+# +        WM_ARCH=linuxAArch64
+# +        export WM_COMPILER_LIB_ARCH=64
+# +        export WM_CC='gcc'
+# +        export WM_CXX='g++'
+# +        export WM_CFLAGS='-fPIC'
+# +        export WM_CXXFLAGS='-fPIC'
+# +        export WM_LDFLAGS=
+# +        ;;
+# +
+#      *)
+#          echo Unknown processor type `uname -m` for Linux 1>&2
+#          ;;
+	 

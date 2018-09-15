@@ -1,0 +1,11 @@
+--- ./etc/bashrc	2017-08-30 17:52:26.762675252 +0000
++++ ../bashrc	2017-08-30 17:52:44.758599584 +0000
+@@ -115,7 +115,7 @@
+ # Location of installation
+ # ~~~~~~~~~~~~~~~~~~~~~~~~
+ export WM_PROJECT_INST_DIR=$FOAM_INST_DIR
+-export WM_PROJECT_DIR=$WM_PROJECT_INST_DIR/$WM_PROJECT-$WM_PROJECT_VERSION
++export WM_PROJECT_DIR=$WM_PROJECT_INST_DIR/src
+ 
+ # Location of third-party software
+ # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
