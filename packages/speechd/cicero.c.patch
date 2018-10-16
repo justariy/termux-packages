@@ -1,0 +1,12 @@
+--- ../cicero.c.orig	2018-10-16 17:04:14.879079278 +0000
++++ ./src/modules/cicero.c	2018-10-16 17:05:16.879063574 +0000
+@@ -30,7 +30,9 @@
+ #include <errno.h>
+ #include <poll.h>
+ #include <fcntl.h>
++#ifndef __ANDROID__
+ #include <langinfo.h>
++#endif
+ #include <sys/stat.h>
+ #include <semaphore.h>
+ 

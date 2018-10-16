@@ -1,0 +1,13 @@
+--- ../espeak-ng.c.orig	2018-10-16 17:09:53.731025362 +0000
++++ ./src/modules/espeak-ng.c	2018-10-16 17:10:35.847019793 +0000
+@@ -485,8 +485,8 @@
+ 	g_usleep(25000);
+ 
+ 	/* Make sure threads have really exited */
+-	pthread_cancel(espeak_play_thread);
+-	pthread_cancel(espeak_stop_or_pause_thread);
++	pthread_kill(espeak_play_thread, 0);
++	pthread_kill(espeak_stop_or_pause_thread, 0);
+ 
+ 	DBG("Joining  play thread.");
+ 	pthread_join(espeak_play_thread, NULL);

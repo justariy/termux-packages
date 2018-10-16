@@ -1,0 +1,11 @@
+--- ../speechd.c.orig	2018-10-16 17:02:24.935104829 +0000
++++ ./src/server/speechd.c	2018-10-16 17:02:38.791101774 +0000
+@@ -1255,7 +1255,7 @@
+ 	g_hash_table_destroy(fd_settings);
+ 
+ 	MSG(4, "Closing speak() thread...");
+-	ret = pthread_cancel(speak_thread);
++	ret = pthread_kill(speak_thread, 0);
+ 	if (ret != 0)
+ 		FATAL("Speak thread failed to cancel!\n");
+ 

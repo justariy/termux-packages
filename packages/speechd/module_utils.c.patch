@@ -1,0 +1,22 @@
+--- ../module_utils.c.orig	2018-10-16 17:04:01.847082461 +0000
++++ ./src/modules/module_utils.c	2018-10-16 17:08:29.199035740 +0000
+@@ -854,16 +854,17 @@
+ 	} else {
+ 		DBG("Can't fill signal set, expect problems when terminating!\n");
+ 	}
+-
++	#ifndef __ANDROID__
+ 	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+ 	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
++	#endif
+ }
+ 
+ int module_terminate_thread(pthread_t thread)
+ {
+ 	int ret;
+ 
+-	ret = pthread_cancel(thread);
++	ret = pthread_kill(thread, 0);
+ 	if (ret != 0) {
+ 		DBG("Cancellation of speak thread failed");
+ 		return 1;

@@ -1,0 +1,11 @@
+--- ../libspeechd.c.orig	2018-10-16 17:18:09.354943926 +0000
++++ ./src/api/c/libspeechd.c	2018-10-16 17:18:38.390938117 +0000
+@@ -576,7 +576,7 @@
+ 	pthread_mutex_lock(connection->ssip_mutex);
+ 
+ 	if (connection->mode == SPD_MODE_THREADED) {
+-		pthread_cancel(*connection->events_thread);
++		pthread_kill(*connection->events_thread, 0);
+ 		pthread_mutex_destroy(connection->mutex_reply_ready);
+ 		pthread_mutex_destroy(connection->mutex_reply_ack);
+ 		pthread_cond_destroy(connection->cond_reply_ready);

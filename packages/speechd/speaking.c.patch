@@ -1,0 +1,14 @@
+--- ../speaking.c.orig	2018-10-16 16:59:38.163137666 +0000
++++ ./src/server/speaking.c	2018-10-16 17:00:45.427125310 +0000
+@@ -902,9 +902,10 @@
+ 		MSG(1,
+ 		    "Can't fill signal set, expect problems when terminating!");
+ 	}
+-
++	#ifndef __ANDROID__
+ 	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+ 	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
++	#endif
+ }
+ 
+ void stop_priority_except_first(SPDPriority priority)
