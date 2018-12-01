@@ -16,3 +16,9 @@ termux_step_pre_configure () {
 termux_step_post_make_install () {
 	install $TERMUX_PKG_SRCDIR/doc/mpdscribble.conf $TERMUX_PREFIX/etc/
 }
+termux_step_create_debscripts () {
+	echo "#!$TERMUX_PREFIX/bin/sh" > postinst
+	echo "mkdir -p ~/.mpdscribble" >> postinst
+	echo "exit 0" >> postinst
+	chmod 0755 postinst
+}
