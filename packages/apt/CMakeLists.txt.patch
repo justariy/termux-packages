@@ -21,20 +21,6 @@ diff -u -r ../apt-1.4.7/CMakeLists.txt ./CMakeLists.txt
  # Set compiler flags
  set(CMAKE_CXX_STANDARD 11)
  set(CMAKE_CXX_STANDARD_REQUIRED ON)
-@@ -69,13 +63,6 @@
- add_optional_compile_options(Wsign-promo)
- add_optional_compile_options(Wundef)
- 
--# apt-ftparchive dependencies
--find_package(BerkeleyDB REQUIRED)
--if (BERKELEY_DB_FOUND)
--  set(HAVE_BDB 1)
--endif()
--
--
- # apt-transport-https dependencies
- find_package(CURL REQUIRED)
- if (CURL_FOUND)
 @@ -89,21 +76,12 @@
  endif()
  
@@ -72,13 +58,13 @@ diff -u -r ../apt-1.4.7/CMakeLists.txt ./CMakeLists.txt
  if (NOT DEFINED ROOT_GROUP)
    execute_process(COMMAND id -gn root
                    OUTPUT_VARIABLE ROOT_GROUP OUTPUT_STRIP_TRAILING_WHITESPACE)
-@@ -211,11 +189,8 @@
+@@ -211,11 +189,9 @@
  add_subdirectory(apt-inst)
  add_subdirectory(cmdline)
  add_subdirectory(completions)
 -add_subdirectory(doc)
  add_subdirectory(dselect)
--add_subdirectory(ftparchive)
+ add_subdirectory(ftparchive)
  add_subdirectory(methods)
 -add_subdirectory(test)
  
