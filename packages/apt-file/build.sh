@@ -6,3 +6,4 @@ TERMUX_PKG_SRCURL=http://deb.debian.org/debian/pool/main/a/apt-file/apt-file_${T
 TERMUX_PKG_BUILD_IN_SRC=yes
 TERMUX_PKG_EXTRA_MAKE_ARGS="DESTDIR=$TERMUX_PREFIX"
 TERMUX_PKG_PLATFORM_INDEPENDENT=yes
+TERMUX_PKG_DEPENDS="apt, perl, libapt-pkg, libapt-pkg-perl"
