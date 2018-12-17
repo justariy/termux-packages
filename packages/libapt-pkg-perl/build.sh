@@ -12,7 +12,14 @@ TERMUX_PKG_MAKE_PROCESSES=1
 TERMUX_PKG_BUILD_IN_SRC=yes
 
 termux_step_pre_configure () {
+	# pwd is needed by build
+	mv $TERMUX_PREFIX/bin/applets/pwd{,.bak}
+	ln -s /usr/bin/pwd $TERMUX_PREFIX/bin/applets/pwd
 	export PERL5LIB="$TERMUX_PREFIX/lib/perl5/5.28.1:$TERMUX_PREFIX/lib/perl5/5.28.1/${TERMUX_ARCH}-android"
 	$TERMUX_TOPDIR/perl/src/miniperl_top Makefile.PL INSTALLDIRS=perl INSTALLMAN1DIR=$TERMUX_PREFIX/share/man/man1 INSTALLMAN3DIR=$TERMUX_PREFIX/share/man/man3
 }
 
+termux_step_post_make_install () {
+	# restore pwd
+	mv $TERMUX_PREFIX/bin/applets/pwd{.bak,}
+}
