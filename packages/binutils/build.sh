@@ -13,7 +13,7 @@ TERMUX_PKG_KEEP_STATIC_LIBRARIES=true
 export LEXLIB=
 
 termux_step_pre_configure () {
-	export CPPFLAGS="$CPPFLAGS -Wno-c++11-narrowing"
+	export CPPFLAGS="$CPPFLAGS -Wno-c++11-narrowing -Wno-unused-command-line-argument"
 
 	if [ $TERMUX_ARCH_BITS = 32 ]; then
 		export LIB_PATH="${TERMUX_PREFIX}/lib:/system/lib"
