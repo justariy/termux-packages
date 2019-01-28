@@ -1220,7 +1220,7 @@ termux_step_massage() {
 		test ! -z "$TERMUX_SUBPKG_CONFLICTS" && echo "Conflicts: $TERMUX_SUBPKG_CONFLICTS" >> control
 		test ! -z "$TERMUX_SUBPKG_REPLACES" && echo "Replaces: $TERMUX_SUBPKG_REPLACES" >> control
 		echo "Description: $TERMUX_SUBPKG_DESCRIPTION" >> control
-		tar -czf "$SUB_PKG_PACKAGE_DIR/control.tar.gz" .
+		rm -f "$TERMUX_PKG_PACKAGEDIR/control.tar*" && tar -czf "$SUB_PKG_PACKAGE_DIR/control.tar.gz" .
 
 		for f in $TERMUX_SUBPKG_CONFFILES; do echo "$TERMUX_PREFIX/$f" >> conffiles; done
 
@@ -1304,7 +1304,7 @@ termux_step_create_debfile() {
 	termux_step_create_debscripts
 
 	# Create control.tar.gz
-	tar -czf "$TERMUX_PKG_PACKAGEDIR/control.tar.gz" .
+	rm -f "$TERMUX_PKG_PACKAGEDIR/control.tar*" && tar -czf "$TERMUX_PKG_PACKAGEDIR/control.tar.gz" .
 
 	test ! -f "$TERMUX_COMMON_CACHEDIR/debian-binary" && echo "2.0" > "$TERMUX_COMMON_CACHEDIR/debian-binary"
 	TERMUX_PKG_DEBFILE=$TERMUX_DEBDIR/${TERMUX_PKG_NAME}${DEBUG}_${TERMUX_PKG_FULLVERSION}_${TERMUX_ARCH}.deb
