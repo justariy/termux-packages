@@ -1,11 +1,14 @@
 Patch assimilated from archlinux
 
-diff -u -r ../texlive-source-texlive-2018.2.orig/texk/web2c/luatexdir/image/pdftoepdf.w ./texk/web2c/luatexdir/image/pdftoepdf.w
---- ../texlive-source-texlive-2018.2.orig/texk/web2c/luatexdir/image/pdftoepdf.w	2018-12-23 10:51:16.142985550 +0100
-+++ ./texk/web2c/luatexdir/image/pdftoepdf.w	2018-12-23 10:56:23.056297860 +0100
-@@ -35,7 +35,7 @@
+diff -u -r ../luatexdir.orig/image/pdftoepdf.w ./texk/web2c/luatexdir/image/pdftoepdf.w
+--- ../luatexdir.orig/image/pdftoepdf.w	2019-03-02 07:44:03.663315269 +0100
++++ ./texk/web2c/luatexdir/image/pdftoepdf.w	2019-03-02 07:49:30.589979636 +0100
+@@ -33,9 +33,9 @@
  
- extern void md5(Guchar *msg, int msgLen, Guchar *digest);
+ */
+ 
+-extern void md5(Guchar *msg, int msgLen, Guchar *digest);
++extern void md5(unsigned char *msg, int msgLen, unsigned char *digest);
  
 -static GBool isInit = gFalse;
 +static bool isInit = false;
@@ -102,9 +105,9 @@ diff -u -r ../texlive-source-texlive-2018.2.orig/texk/web2c/luatexdir/image/pdft
 -    isInit = gFalse;
 +    isInit = false;
  }
-diff -u -r ../texlive-source-texlive-2018.2.orig/texk/web2c/luatexdir/lua/lepdflib.cc ./texk/web2c/luatexdir/lua/lepdflib.cc
---- ../texlive-source-texlive-2018.2.orig/texk/web2c/luatexdir/lua/lepdflib.cc	2018-12-23 10:51:16.142985550 +0100
-+++ ./texk/web2c/luatexdir/lua/lepdflib.cc	2018-12-23 10:56:23.056297860 +0100
+diff -u -r ../luatexdir.orig/lua/lepdflib.cc ./texk/web2c/luatexdir/lua/lepdflib.cc
+--- ../luatexdir.orig/lua/lepdflib.cc	2019-03-02 07:44:03.656648603 +0100
++++ ./texk/web2c/luatexdir/lua/lepdflib.cc	2019-03-02 07:49:30.593312970 +0100
 @@ -240,7 +240,7 @@
         if (uobj->pd != NULL && uobj->pd->pc != uobj->pc)
            pdfdoc_changed_error(L);
@@ -251,6 +254,21 @@ diff -u -r ../texlive-source-texlive-2018.2.orig/texk/web2c/luatexdir/lua/lepdfl
          uout = new_StructTreeRoot_userdata(L);
          uout->d = obj;
          uout->pc = uin->pc;
+@@ -3024,12 +3024,12 @@
+ 
+ static int m_Attribute_setRevision(lua_State * L)
+ {
+-    Guint i;
++    unsigned int i;
+     udstruct *uin;
+     uin = (udstruct *) luaL_checkudata(L, 1, M_Attribute);
+     if (uin->pd != NULL && uin->pd->pc != uin->pc)
+         pdfdoc_changed_error(L);
+-    i = (Guint) luaL_checkint(L, 2);
++    i = (unsigned int) luaL_checkint(L, 2);
+     ((Attribute *) uin->d)->setRevision(i);
+     return 0;
+ }
 @@ -3038,12 +3038,12 @@
  
  static int m_Attribute_setHidden(lua_State * L)
@@ -275,7 +293,21 @@ diff -u -r ../texlive-source-texlive-2018.2.orig/texk/web2c/luatexdir/lua/lepdfl
      Ref *r;
      udstruct *uin, *uout;
      uin = (udstruct *) luaL_checkudata(L, 1, M_StructElement);
-@@ -3226,16 +3226,16 @@
+@@ -3214,28 +3214,28 @@
+ 
+ static int m_StructElement_setRevision(lua_State * L)
+ {
+-    Guint i;
++    unsigned int i;
+     udstruct *uin;
+     uin = (udstruct *) luaL_checkudata(L, 1, M_StructElement);
+     if (uin->pd != NULL && uin->pd->pc != uin->pc)
+         pdfdoc_changed_error(L);
+-    i = (Guint) luaL_checkint(L, 2);
++    i = (unsigned int) luaL_checkint(L, 2);
+     ((StructElement *) uin->d)->setRevision(i);
+     return 0;
+ }
  
  static int m_StructElement_getText(lua_State * L)
  {

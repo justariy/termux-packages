@@ -1,5 +1,8 @@
---- ../pdftoepdf.cc.orig	2018-12-20 22:46:08.473192736 +0100
-+++ ./texk/web2c/pdftexdir/pdftoepdf.cc	2018-12-20 17:49:07.629989680 +0100
+Patch assimilated from archlinux
+
+diff -u -r ../pdftexdir.orig/pdftoepdf.cc ./texk/web2c/pdftexdir/pdftoepdf.cc
+--- ../pdftexdir.orig/pdftoepdf.cc	2019-03-02 07:44:13.926648530 +0100
++++ ./texk/web2c/pdftexdir/pdftoepdf.cc	2019-03-02 07:50:14.619979322 +0100
 @@ -1,5 +1,5 @@
  /*
 -Copyright 1996-2016 Han The Thanh, <thanh@pdftex.org>
@@ -591,8 +594,9 @@
              if (i < l - 1)
                  pdf_newline();  // add a newline after each stream except the last
          }
---- ../pdftosrc.cc.orig	2018-12-20 22:46:34.129859210 +0100
-+++ ./texk/web2c/pdftexdir/pdftosrc.cc	2018-12-20 17:49:58.393322645 +0100
+diff -u -r ../pdftexdir.orig/pdftosrc.cc ./texk/web2c/pdftexdir/pdftosrc.cc
+--- ../pdftexdir.orig/pdftosrc.cc	2019-03-02 07:44:13.926648530 +0100
++++ ./texk/web2c/pdftexdir/pdftosrc.cc	2019-03-02 07:50:14.619979322 +0100
 @@ -16,6 +16,14 @@
  You should have received a copy of the GNU General Public License along
  with this program.  If not, see <http://www.gnu.org/licenses/>.
@@ -673,9 +677,12 @@
          if ((p = strrchr(buf, '.')) == 0)
              p = strchr(buf, 0);
          sprintf(p, ".xref");
-@@ -160,34 +163,27 @@
+@@ -158,36 +161,29 @@
+                 Object objStr, obj1, obj2;
+                 int nObjects, first, n;
                  int localOffset = 0;
-                 Guint firstOffset;
+-                Guint firstOffset;
++                unsigned int firstOffset;
  
 -                assert(xref->fetch(e->offset, 0, &objStr)->isStream());
 -                nObjects = objStr.streamGetDict()->lookup("N", &obj1)->getInt();

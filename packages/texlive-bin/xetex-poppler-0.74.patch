@@ -1,6 +1,8 @@
-diff -u -r ../texlive-source-texlive-2018.2.orig/texk/web2c/xetexdir/pdfimage.cpp ./texk/web2c/xetexdir/pdfimage.cpp
---- ../texlive-source-texlive-2018.2.orig/texk/web2c/xetexdir/pdfimage.cpp	2018-12-23 10:51:16.249652209 +0100
-+++ ./texk/web2c/xetexdir/pdfimage.cpp	2018-12-23 12:00:04.419369459 +0100
+Patch assimilated from archlinux
+
+diff -u -r ../xetexdir.orig/pdfimage.cpp ./texk/web2c/xetexdir/pdfimage.cpp
+--- ../xetexdir.orig/pdfimage.cpp	2019-03-02 07:44:23.079981805 +0100
++++ ./texk/web2c/xetexdir/pdfimage.cpp	2019-03-02 07:50:05.639979391 +0100
 @@ -82,19 +82,19 @@
  	switch (pdf_box) {
  		default:
