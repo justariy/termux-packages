@@ -8,7 +8,7 @@ TERMUX_PKG_SRCURL=https://github.com/syncthing/syncthing/releases/download/v${TE
 termux_step_make(){
 	termux_setup_golang
 
-	# The build.sh script doesn't with our compiler
+	# The build.sh script doesn't work with our compiler
 	# so small adjustments to file locations are needed
 	# so the build.go is fine.
 	mkdir -p go/src/github.com/syncthing/syncthing
