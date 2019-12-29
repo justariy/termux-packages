@@ -1,7 +1,8 @@
-diff -u -r ../gdb-8.1/gdb/gnulib/import/string.in.h ./gdb/gnulib/import/string.in.h
---- ../gdb-8.1/gdb/gnulib/import/string.in.h	2017-06-04 17:51:26.000000000 +0200
-+++ ./gdb/gnulib/import/string.in.h	2018-02-01 22:09:38.398023253 +0100
-@@ -183,9 +183,8 @@
+diff --git a/gnulib/import/string.in.h b/gnulib/import/string.in.h
+index 9b8ced24cd..22d2dc1606 100644
+--- a/gnulib/import/string.in.h
++++ b/gnulib/import/string.in.h
+@@ -200,9 +200,8 @@ _GL_WARN_ON_USE (memmem, "memmem is unportable and often quadratic - "
  #if @GNULIB_MEMPCPY@
  # if ! @HAVE_MEMPCPY@
  _GL_FUNCDECL_SYS (mempcpy, void *,

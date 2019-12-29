@@ -1,7 +1,8 @@
-diff -u -r ../gdb-8.1/gdb/common/job-control.c ./gdb/common/job-control.c
---- ../gdb-8.1/gdb/common/job-control.c	2018-01-05 05:07:23.000000000 +0100
-+++ ./gdb/common/job-control.c	2018-02-01 21:19:44.732858138 +0100
-@@ -45,10 +45,7 @@
+diff --git a/gdb/gdbsupport/job-control.c b/gdb/gdbsupport/job-control.c
+index cd3dde12fb..7c9020167a 100644
+--- a/gdb/gdbsupport/job-control.c
++++ b/gdb/gdbsupport/job-control.c
+@@ -45,10 +45,7 @@ gdb_setpgid ()
    if (job_control)
      {
  #ifdef HAVE_SETPGID

@@ -1,0 +1,20 @@
+diff --git a/gdb/gdbsupport/signals-state-save-restore.c b/gdb/gdbsupport/signals-state-save-restore.c
+index 25a8220976..ab8a1bf455 100644
+--- a/gdb/gdbsupport/signals-state-save-restore.c
++++ b/gdb/gdbsupport/signals-state-save-restore.c
+@@ -66,6 +66,7 @@ save_original_signals_state (bool quiet)
+ 	  && oldact->sa_handler != SIG_DFL
+ 	  && oldact->sa_handler != SIG_IGN)
+ 	{
++#ifndef __ANDROID__
+ 	  found_preinstalled = true;
+ 
+ 	  /* Use raw fprintf here because we're being called in early
+@@ -74,6 +75,7 @@ save_original_signals_state (bool quiet)
+ 		   _("warning: Found custom handler for signal "
+ 		     "%d (%s) preinstalled.\n"), i,
+ 		   strsignal (i));
++#endif
+ 	}
+     }
+ 
